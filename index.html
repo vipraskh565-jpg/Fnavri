@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>وبلاگ فناوری و آموزش</title>
+<meta name="description" content="آموزش‌های کوتاه و ساده درباره فناوری، وب، هوش مصنوعی و امنیت، مخصوص کسانی که تازه شروع کرده‌اند.">
+<meta name="google-site-verification" content="vwRyiLJB6qbubbY8MWpUhYEHtMBJj4SYiqzZn84oS8o">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="وبلاگ فناوری و آموزش">
+<meta property="og:description" content="آموزش‌های کوتاه و ساده درباره فناوری برای مبتدی‌ها.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fa_IR">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E💡%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2f5fa;--surface:#fff;--ink:#14213d;--muted:#5b6578;--accent:#2f5bff;--mark:#ffd166;--line:#d9e0ec;color-scheme:light;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#10162a;--surface:#182040;--ink:#eef2ff;--muted:#a3adc8;--accent:#8aa4ff;--mark:#ffd166;--line:#2a3560;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#10162a;--surface:#182040;--ink:#eef2ff;--muted:#a3adc8;--accent:#8aa4ff;--mark:#ffd166;--line:#2a3560;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Vazirmatn,Tahoma,sans-serif;line-height:1.9}
+.wrap{max-width:720px;margin:0 auto;padding:0 20px}
+header{display:flex;justify-content:space-between;align-items:center;padding:20px 0;border-bottom:2px solid var(--ink)}
+.logo{font-weight:800;font-size:1.1rem}
+.logo span{background:var(--mark);color:#14213d;padding:0 8px;border-radius:4px}
+.hero{padding:48px 0 28px}
+h1{font-size:clamp(2rem,8vw,3.2rem);line-height:1.35;margin:0 0 12px;font-weight:800}
+.hero p{color:var(--muted);margin:0;max-width:34em}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:24px 0}
+.chips button{font:inherit;border:1.5px solid var(--ink);background:none;color:var(--ink);padding:4px 16px;border-radius:99px;cursor:pointer}
+.chips button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+article{background:var(--surface);border:1px solid var(--line);border-right:5px solid var(--accent);border-radius:8px;padding:18px 20px;margin-bottom:14px}
+article h2{font-size:1.2rem;margin:0 0 4px}
+.meta{color:var(--muted);font-size:.85rem}
+article p{margin:8px 0 0}
+.more{display:none}
+article.open .more{display:block}
+.toggle{font:inherit;background:none;border:0;color:var(--accent);padding:0;margin-top:8px;cursor:pointer;font-weight:500}
+input[type=search]{width:100%;font:inherit;padding:10px 16px;border:1.5px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);margin-bottom:16px}
+.about{margin:32px 0 0;padding:20px;border-top:2px solid var(--ink)}
+.about h2{margin:0 0 4px}
+footer{color:var(--muted);text-align:center;padding:32px 0;font-size:.9rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="logo">فناوری <span>ساده</span></div>
+  <div class="meta">آموزش از صفر</div>
+</header>
+<section class="hero">
+  <h1>یاد بگیر، بساز، منتشر کن</h1>
+  <p>آموزش‌های کوتاه و ساده درباره فناوری، برای کسانی که تازه شروع کرده‌اند.</p>
+</section>
+<div class="chips" id="chips">
+  <button data-c="all" aria-pressed="true">همه</button>
+  <button data-c="وب" aria-pressed="false">وب</button>
+  <button data-c="هوش مصنوعی" aria-pressed="false">هوش مصنوعی</button>
+  <button data-c="امنیت" aria-pressed="false">امنیت</button>
+</div>
+<input id="q" type="search" placeholder="جستجو در مطالب..." aria-label="جستجو">
+<main id="posts"></main>
+<section class="about"><h2>درباره وبلاگ</h2><p>اینجا درباره فناوری به زبان ساده می‌نویسم. اگر پیشنهادی برای موضوع بعدی دارید، خوشحال می‌شوم.</p></section>
+<footer>© ۱۴۰۵ · این وبلاگ با Claude ساخته شد</footer>
+</div>
+<script>
+var posts=[
+{t:"سایت چطور کار می‌کند؟",c:"وب",d:"۱ آبان",s:"وقتی آدرسی را در مرورگر می‌زنید چه اتفاقی می‌افتد؟",m:"مرورگر از یک سرور فایل‌های سایت را می‌خواهد و آن‌ها را نمایش می‌دهد. این فایل‌ها معمولاً HTML برای ساختار، CSS برای ظاهر و جاوااسکریپت برای تعامل هستند."},
+{t:"هوش مصنوعی را از کجا شروع کنیم؟",c:"هوش مصنوعی",d:"۵ آبان",s:"بدون ریاضی سنگین هم می‌توانید شروع کنید.",m:"اول با ابزارهای آماده کار کنید و بپرسید چه چیزی را می‌شود خودکار کرد. بعداً اگر علاقه داشتید، سراغ پایتون و مفاهیم یادگیری ماشین بروید."},
+{t:"رمز عبور امن چه شکلی است؟",c:"امنیت",d:"۱۰ آبان",s:"سه قانون ساده برای حساب‌های شما.",m:"رمز طولانی انتخاب کنید، برای هر سایت رمز جدا بگذارید و ورود دو مرحله‌ای را فعال کنید. یک مدیر رمز عبور کار را خیلی راحت‌تر می‌کند."},
+{t:"اولین صفحه HTML شما",c:"وب",d:"۱۵ آبان",s:"در پنج دقیقه اولین صفحه‌تان را بسازید.",m:"یک فایل با پسوند html بسازید، داخلش یک عنوان و یک پاراگراف بنویسید و آن را با مرورگر باز کنید. همین است، اولین صفحه شما آماده است."},
+{t:"CSS چیست و چه کاری می‌کند؟",c:"وب",d:"۲۰ آبان",s:"رنگ، فونت و چیدمان سایت دست CSS است.",m:"HTML فقط محتوا را می‌گذارد. با CSS تعیین می‌کنید متن چه رنگی باشد، چقدر فاصله داشته باشد و در گوشی چطور چیده شود."},
+{t:"پرامپت خوب چطور نوشته می‌شود؟",c:"هوش مصنوعی",d:"۲۴ آبان",s:"سؤال دقیق‌تر، جواب بهتر.",m:"هدف، زمینه و قالب جواب را بنویسید. مثلاً به‌جای «درباره سئو بگو»، بنویسید «برای وبلاگ تازه‌کار، سه کار ساده سئو را با مثال توضیح بده»."},
+{t:"فیشینگ را چطور تشخیص بدهیم؟",c:"امنیت",d:"۲۸ آبان",s:"پیام‌های جعلی را در چند ثانیه بشناسید.",m:"به آدرس فرستنده و لینک دقت کنید و اگر پیام عجله یا تهدید دارد، مشکوک شوید. هرگز از روی لینک پیام وارد حساب بانکی نشوید."},
+{t:"سئو یعنی چه؟",c:"وب",d:"۳ آذر",s:"چطور سایت در گوگل پیدا شود؟",m:"عنوان و توضیح مناسب برای هر صفحه بنویسید، محتوای مفید منتشر کنید و سایت را در Search Console ثبت کنید. نتیجه معمولاً چند هفته طول می‌کشد."}];
+var box=document.getElementById("posts"),cur="all",q="";
+document.getElementById("q").oninput=function(){q=this.value.trim();render()};
+function render(){box.innerHTML="";posts.forEach(function(p){
+if(cur!=="all"&&p.c!==cur)return;
+if(q&&(p.t+p.s+p.m).indexOf(q)<0)return;
+var a=document.createElement("article");
+a.innerHTML='<h2></h2><div class="meta"></div><p></p><p class="more"></p><button class="toggle">ادامه مطلب</button>';
+a.querySelector("h2").textContent=p.t;
+a.querySelector(".meta").textContent=p.c+" · "+p.d;
+a.querySelectorAll("p")[0].textContent=p.s;
+a.querySelector(".more").textContent=p.m;
+var b=a.querySelector(".toggle");
+b.onclick=function(){var o=a.classList.toggle("open");b.textContent=o?"بستن":"ادامه مطلب"};
+box.appendChild(a)})}
+document.getElementById("chips").onclick=function(e){
+var b=e.target.closest("button");if(!b)return;cur=b.dataset.c;
+this.querySelectorAll("button").forEach(function(x){x.setAttribute("aria-pressed",x===b)});render()};
+render();
+</script>
+</body>
+</html>
